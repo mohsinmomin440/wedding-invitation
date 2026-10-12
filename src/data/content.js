@@ -184,7 +184,14 @@ export const family = {
     ['Mr. Prakashbhai Babubhai Karia', 'Mrs. Beenaben Prakashbhai Karia'],
   ],
   awaits: 'Entire Karia Family awaits your presence',
-  tahuko: { title: 'Tahuko', lines: [] },
+  tahuko: {
+    title: 'Tahuko',
+    lines: [
+      'સોનાનો સૂરજ ઉગ્યો, રૂડો અવસર આવ્યો અમ ઘેર, રૂડા માંડવા રોપાશે, લીલા તોરણ્યા બંધાશે,',
+      'ઢબુક ઢોલ વાગશે, મીઠી શરણાઈ વાગશે મારા કાકા / મામાના લગન્યા લેવાય છે, માટે તમે જરૂર આવજો ભુલાઈ નહિ.....',
+    ],
+    from: '– Kiyansh, Rishiv, Krisha',
+  },
   note: 'No gifts,no flowers only blessings',
 }
 

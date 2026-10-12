@@ -24,14 +24,29 @@ export default function Family() {
         <p className="text-lg font-semibold text-rust italic sm:text-xl">{family.awaits}</p>
       </Reveal>
 
-      {family.tahuko.lines.length > 0 && (
-        <Reveal delay={1050} className="mt-6">
-          <h3 className="text-lg text-crimson uppercase sm:text-xl">{family.tahuko.title}</h3>
-          {family.tahuko.lines.map((l) => (
-            <p key={l} className="mt-1 text-base text-teal-deep">
-              {l}
-            </p>
-          ))}
+      {family.tahuko?.lines?.length > 0 && (
+        <Reveal delay={1050} className="mt-5 max-w-xl">
+          <h3 className="text-base tracking-[0.2em] text-crimson uppercase sm:text-lg">{family.tahuko.title}</h3>
+          <div className="mt-2 space-y-1 font-gujarati text-sm leading-relaxed text-teal-deep sm:text-base">
+            {family.tahuko.lines.map((l) => (
+              <p key={l}>{l}</p>
+            ))}
+          </div>
+          {(family.tahuko.from || family.tahuko.fromEn) && (
+            <div className="mt-3 flex flex-col items-center">
+              <span className="h-px w-16 bg-rust/40" />
+              {family.tahuko.from && (
+                <p className="mt-1.5 text-sm font-semibold text-rust sm:text-base">
+                  {family.tahuko.from}
+                </p>
+              )}
+              {family.tahuko.fromEn && (
+                <p className="mt-0.5 text-xs tracking-wider text-teal-deep/80 sm:text-xs">
+                  {family.tahuko.fromEn}
+                </p>
+              )}
+            </div>
+          )}
         </Reveal>
       )}
 
