@@ -29,7 +29,7 @@ export default function Ganesh() {
       </Reveal>
 
       {/* Main page 1 invocations: Shloka + Shree Ganeshay Namah + Jalaram Bapa + Kuldevi */}
-      <Reveal delay={200} lang="gu" className="mt-4 font-gujarati text-base leading-relaxed font-semibold text-rust sm:text-xl">
+      <Reveal delay={200} lang="sa" className="mt-4 font-devanagari text-base leading-relaxed font-semibold text-rust sm:text-xl">
         {opening.shloka.map((l) => (
           <p key={l}>{l}</p>
         ))}
@@ -65,10 +65,12 @@ export default function Ganesh() {
       </div>
 
       {/* Scroll indicator prompt */}
-      <Reveal delay={2400} className="mt-6 flex flex-col items-center text-teal-deep/70">
-        <span className="text-[10px] tracking-[0.3em] uppercase sm:text-xs">Scroll to explore</span>
-        <svg className="mt-1 size-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      <Reveal delay={2400} className="mt-6 flex flex-col items-center">
+        <span className="rounded-full border-2 border-crimson bg-paper/90 px-5 py-1.5 text-xs font-bold tracking-[0.25em] text-crimson uppercase shadow-md sm:text-sm">
+          Scroll to explore
+        </span>
+        <svg className="mt-2 size-7 animate-bounce text-crimson sm:size-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </Reveal>
     </Card>

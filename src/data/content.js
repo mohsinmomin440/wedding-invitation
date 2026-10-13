@@ -18,8 +18,8 @@ export const mantra = {
 // MAIN PAGE 1: GANESH
 export const opening = {
   shloka: [
-    'વક્રતુંડ મહાકાય સૂર્યકોટી સમપ્રભ ।',
-    'નિર્વિઘ્નં કુરુ મે દેવ સર્વકાર્યેષુ સર્વદા ॥',
+    'वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।',
+    'निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥',
   ],
   intro: 'Wedding invitation of',
   groom: { name: 'Yatin', parents: '(Son of Sona and Pritesh Karia)' },
@@ -31,11 +31,56 @@ export const description = {
   title: 'Saptabandhan',
   subtitle: 'Our Wedding Journey in Seven Sacred Chapters',
   paragraphs: [
-    "Our wedding journey unfolds in seven sacred chapters beginning with the decision to celebrate our lotus-like souls' union with all of you in the Kankotri-lekhan. The groom and his family then introduced the bride to their customs and bound the souls in a “sacred wedding knot” during the Chundadi Function followed by the fragrant, love-filled waves of the Mehndi celebration to both families.",
-    'We then sought auspicious planetary blessings to direct us through life, like the North Star with the auspicious Grah Shanti before we go back to our roots, where all near and dear ones bless us Infinity with health and prosperity through the customary healthy Haldi.',
-    'In the penultimate stage, all of us gather under the stars to dance and celebrate to the moon and back in Sangeet Night leading finally to the ultimate Vivah, where Agnidev witnesses and blesses our eternal union.',
+    [
+      { text: "Our wedding journey unfolds in seven sacred chapters beginning with the decision to celebrate our " },
+      { text: "Lotus", type: "element" },
+      { text: "-like souls' union with all of you in the " },
+      { text: "Kankotri Lekhan", type: "function" },
+      { text: ". The groom and his family then introduced the bride to their customs and bound the souls in a " },
+      { text: "“Sacred Wedding Knot”", type: "element" },
+      { text: " during the " },
+      { text: "Chundadi Function", type: "function" },
+      { text: " followed by the fragrant, love-filled " },
+      { text: "Waves", type: "element" },
+      { text: " of the " },
+      { text: "Mehndi Celebration", type: "function" },
+      { text: " to both families." },
+    ],
+    [
+      { text: "We then sought auspicious planetary blessings to direct us through life, like the " },
+      { text: "North Star", type: "element" },
+      { text: " with the auspicious " },
+      { text: "Grah Shanti", type: "function" },
+      { text: " before we go back to our roots, where all near and dear ones bless us " },
+      { text: "Infinity", type: "element" },
+      { text: " with health and prosperity through the customary healthy " },
+      { text: "Haldi", type: "function" },
+      { text: "." },
+    ],
+    [
+      { text: "In the penultimate stage, all of us gather under the stars to dance and celebrate to the " },
+      { text: "Moon and back", type: "element" },
+      { text: " in " },
+      { text: "Sangeet Night", type: "function" },
+      { text: " leading finally to the ultimate " },
+      { text: "Vivah", type: "function" },
+      { text: ", where " },
+      { text: "Agnidev (Agni)", type: "element" },
+      { text: " witnesses and blesses our eternal union." },
+    ],
   ],
 }
+
+// SEQUENCE OF ELEMENTS
+export const sequenceOfElements = [
+  { icon: 'lotus', name: 'Lotus', meaning: 'Purity, spiritual awakening and divine blessings.' },
+  { icon: 'knot', name: 'The Sacred Knot', meaning: 'The sacred knot of marriage, symbolizing unity and commitment.' },
+  { icon: 'waves', name: 'Waves', meaning: 'Love that comes in fragrant, joyous waves.' },
+  { icon: 'north-star', name: 'The North Star', meaning: 'Guidance and protection of celestial bodies.' },
+  { icon: 'infinity', name: 'Infinity', meaning: 'Deep roots and an unending bond of health and prosperity.' },
+  { icon: 'sun-moon', name: 'Sun-Moon', meaning: 'Harmonious celebration balancing energies in the galaxy.' },
+  { icon: 'agni', name: 'Agni', meaning: 'The sacred fire witnessing and blessing our eternal union.' },
+]
 
 const PARADISE_PARK = ['12,Paradise Park society,Behind Welcom hotel,', 'Ushmanpura,Ahmedabad,Gujarat']
 const KAMLA_AMRUT = ['Kamla Amrut Farm']
@@ -48,6 +93,9 @@ export const events = [
     theme: 'rajputana',
     element: 'knot',
     invocation: { lang: 'sa', text: '॥ શ્રી કૃષ્ણઃ શરણં મમ ॥' },
+    blessing: {
+      verse: { lang: 'sa', lines: ['वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।', 'निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥'] },
+    },
     date: 'Saturday, 20th November 2026',
     schedule: [{ label: 'Timing', time: '6:00 PM onwards', note: '(followed by Dinner)' }],
     dressCode: { label: 'Green', colors: ['#2f7d4a'] },

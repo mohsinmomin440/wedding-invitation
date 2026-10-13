@@ -48,12 +48,12 @@ export default function EventPage({ event }) {
       <div className="flex w-full flex-col items-center text-(--page-ink)">
         {/* Element representation logo / icon */}
         <Reveal delay={100} className="flex flex-col items-center">
-          <span className="relative grid size-14 place-items-center sm:size-16">
+          <span className="relative grid size-16 place-items-center sm:size-20">
             <span className="absolute inset-0 rounded-full border border-(--accent)/40" />
             <span className="animate-spin-slow absolute inset-1 rounded-full border border-dashed border-(--accent-2)/40" />
             <Icon
               name={event.element}
-              className={`size-9 sm:size-11 ${theme.night ? 'brightness-0 invert sepia-[.6] saturate-[2.5] drop-shadow-sm' : 'brightness-[0.38] contrast-150 saturate-150 drop-shadow-[0_0_0.7px_#2a0d05]'}`}
+              className={`${event.element === 'knot' ? 'size-11 sm:size-14' : 'size-9 sm:size-11'} ${theme.night ? 'brightness-0 invert sepia-[.6] saturate-[2.5] drop-shadow-sm' : 'brightness-[0.38] contrast-150 saturate-150 drop-shadow-[0_0_0.7px_#2a0d05]'}`}
             />
           </span>
         </Reveal>
