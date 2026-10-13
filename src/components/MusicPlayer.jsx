@@ -67,7 +67,7 @@ const MusicPlayer = forwardRef(function MusicPlayer(_, ref) {
           onClick={playing ? pause : play}
           aria-label={playing ? `Pause music: ${music.title}` : `Play music: ${music.title}`}
           aria-pressed={playing}
-          className="fixed top-4 right-4 z-[90] flex items-center gap-2 rounded-full border border-gold/60 bg-teal-deep/85 py-2 pr-4 pl-3 text-paper shadow-lg backdrop-blur-sm transition hover:bg-teal-deep sm:top-6 sm:right-6"
+          className="fixed right-3 bottom-3 z-[90] flex items-center gap-2 rounded-full border border-gold/60 bg-teal-deep/90 p-3 text-paper shadow-xl backdrop-blur-sm transition hover:bg-teal-deep sm:right-6 sm:bottom-6 sm:py-2 sm:pr-4 sm:pl-3"
         >
           <span className="flex h-4 items-end gap-[3px]" aria-hidden="true">
             {[0, 1, 2, 3].map((i) => (
@@ -78,7 +78,7 @@ const MusicPlayer = forwardRef(function MusicPlayer(_, ref) {
               />
             ))}
           </span>
-          <span className="text-xs tracking-[0.2em] uppercase">{music.title}</span>
+          <span className="hidden text-xs tracking-[0.2em] uppercase sm:inline">{music.title}</span>
         </button>
       )}
     </>

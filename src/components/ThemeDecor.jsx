@@ -46,11 +46,11 @@ function Bell({ className = '', delay = 0, length = 60 }) {
   )
 }
 
-function FerrisWheel({ className = '' }) {
+function FerrisWheel({ className = '', ...rest }) {
   const cabins = Array.from({ length: 8 }, (_, i) => (i * Math.PI * 2) / 8)
   const colors = ['#f6a5b8', '#f9d27a', '#9fd7b5', '#9cc7ec', '#c8b0ea']
   return (
-    <div className={className} aria-hidden="true">
+    <div className={className} aria-hidden="true" {...rest}>
       <svg viewBox="0 0 200 220" className="h-full w-full overflow-visible">
         <path d="M100 100 L60 210 M100 100 L140 210 M50 210 H150" stroke="#8a6a52" strokeWidth="3" fill="none" />
         <g className="decor-wheel" style={{ transformOrigin: '100px 100px' }}>
@@ -147,8 +147,8 @@ function Falling({ petals = 14, colors = ['#e69123'], marigolds = 0, seed = 7 })
           style={{
             left: `${p.x * 100}%`,
             top: '-6%',
-            width: `${14 + p.s * 14}px`,
-            height: `${14 + p.s * 14}px`,
+            width: `calc(${14 + p.s * 14}px * var(--fs, 1))`,
+            height: `calc(${14 + p.s * 14}px * var(--fs, 1))`,
             backgroundColor: colors[i % colors.length],
             boxShadow: '0 1px 3px rgba(60,30,10,0.25)',
             animationDuration: `${8 + p.d * 6}s`,
@@ -166,7 +166,7 @@ function Falling({ petals = 14, colors = ['#e69123'], marigolds = 0, seed = 7 })
           style={{
             left: `${p.x * 100}%`,
             top: '-8%',
-            width: `${24 + p.s * 24}px`,
+            width: `calc(${24 + p.s * 24}px * var(--fs, 1))`,
             animationDuration: `${9 + p.d * 6}s`,
             animationDelay: `${0.5 + p.y * 5}s`,
             '--drift': `${(p.x - 0.5) * 160}px`,
@@ -187,7 +187,7 @@ function Rising({ count = 14, kind = 'sparkle', colors = ['#d4a537'], seed = 3 }
         left: `${p.x * 100}%`,
         bottom: '-6%',
         color: colors[i % colors.length],
-        fontSize: `${(kind === 'heart' ? 14 : 10) + p.s * (kind === 'heart' ? 16 : 12)}px`,
+        fontSize: `calc(${(kind === 'heart' ? 14 : 10) + p.s * (kind === 'heart' ? 16 : 12)}px * var(--fs, 1))`,
         textShadow: kind === 'sparkle' ? '0 0 6px rgba(255,214,102,0.9)' : 'none',
         animationDuration: `${9 + p.d * 7}s`,
         animationDelay: `${p.y * 6}s`,
@@ -200,7 +200,7 @@ function Rising({ count = 14, kind = 'sparkle', colors = ['#d4a537'], seed = 3 }
 }
 
 const Layer = ({ children }) => (
-  <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+  <div aria-hidden="true" className="decor-layer pointer-events-none absolute inset-0 overflow-hidden">
     {children}
   </div>
 )
@@ -292,10 +292,15 @@ export default function ThemeDecor({ theme }) {
         <Layer>
           <Falling petals={8} colors={['#e69123', '#f2c230']} marigolds={8} seed={51} />
           <Rising count={10} kind="sparkle" colors={['#f2a030', '#ffcf5a']} seed={55} />
-          <div className="absolute top-0 right-[8%] flex gap-4 sm:right-[10%] sm:gap-8">
-            <Bell className="w-6 sm:w-8" length={50} />
-            <Bell className="w-8 sm:w-10" length={90} delay={400} />
-            <Bell className="w-6 sm:w-8" length={60} delay={800} />
+          <div data-ornament="bells" className="absolute top-0 right-[6%] flex gap-3 sm:hidden">
+            <Bell className="w-4" length={14} />
+            <Bell className="w-5" length={26} delay={400} />
+            <Bell className="w-4" length={18} delay={800} />
+          </div>
+          <div data-ornament="bells" className="absolute top-0 right-[10%] hidden gap-8 sm:flex">
+            <Bell className="w-8" length={50} />
+            <Bell className="w-10" length={90} delay={400} />
+            <Bell className="w-8" length={60} delay={800} />
           </div>
           <div className="absolute right-[5%] bottom-[3%] sm:right-[7%]">
             <Diya className="w-12 sm:w-16" />
@@ -305,9 +310,9 @@ export default function ThemeDecor({ theme }) {
     case 'village': // Haldi: marigolds + pastel petals
       return (
         <Layer>
-          <Bunting className="absolute top-0 right-0 h-12 w-[70%] sm:h-16" />
+          <Bunting className="absolute top-0 right-0 h-8 w-[62%] sm:h-16 sm:w-[70%]" />
           <Falling petals={10} colors={['#f9d27a', '#f6a5b8', '#9fd7b5', '#9cc7ec', '#c8b0ea']} marigolds={7} seed={61} />
-          <FerrisWheel className="absolute right-[3%] bottom-[2%] h-32 w-28 opacity-70 sm:h-48 sm:w-44" />
+          <FerrisWheel data-ornament="wheel" className="absolute right-[3%] bottom-[2%] h-24 w-20 opacity-70 sm:h-48 sm:w-44" />
         </Layer>
       )
     case 'golden': // Sangeet: twinkling stars + falling star-sparkles
@@ -344,7 +349,7 @@ export default function ThemeDecor({ theme }) {
             />
           ))}
           <span className="decor-shooting absolute top-[12%] left-[30%] block h-px w-24 bg-gradient-to-r from-transparent to-[#fff6d8]" />
-          <div className="absolute top-[5%] right-[6%] size-20 rounded-full shadow-[0_0_60px_20px_rgba(255,236,170,0.25)] sm:size-28">
+          <div className="absolute top-[3%] right-[5%] size-14 rounded-full shadow-[0_0_40px_14px_rgba(255,236,170,0.25)] sm:top-[5%] sm:right-[6%] sm:size-28 sm:shadow-[0_0_60px_20px_rgba(255,236,170,0.25)]">
             <div className="h-full w-full rounded-full bg-[radial-gradient(circle_at_35%_35%,#fff8df,#f1d58c_60%,#c9a24e)] [mask-image:radial-gradient(circle_at_72%_32%,transparent_42%,#000_43%)]" />
           </div>
         </Layer>
@@ -353,12 +358,12 @@ export default function ThemeDecor({ theme }) {
       return (
         <Layer>
           <Rays className="decor-spin absolute top-[2%] left-1/2 w-[85%] max-w-[560px] -translate-x-1/2 text-[#d4a537] opacity-15" />
-          <div className="absolute top-0 right-0 flex w-[70%] justify-between px-2">
+          <div data-ornament="toran" className="absolute top-0 right-0 flex w-[62%] justify-between px-2 [--ts:.4] sm:w-[70%] sm:[--ts:1]">
             {Array.from({ length: 9 }, (_, i) => (
               <div key={i} className="decor-toran flex flex-col items-center" style={{ animationDelay: `${i * 200}ms` }}>
-                <span className="block w-px bg-[#8a6a2a]" style={{ height: `${14 + (i % 3) * 10}px` }} />
-                <img src={img('marigold.webp')} alt="" className="w-5 sm:w-7" />
-                <img src={img('marigold.webp')} alt="" className="-mt-1 w-4 sm:w-6" />
+                <span className="block w-px bg-[#8a6a2a]" style={{ height: `calc(${14 + (i % 3) * 10}px * var(--ts, 1))` }} />
+                <img src={img('marigold.webp')} alt="" className="w-3 sm:w-7" />
+                <img src={img('marigold.webp')} alt="" className="-mt-1 hidden w-4 sm:block sm:w-6" />
               </div>
             ))}
           </div>

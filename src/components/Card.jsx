@@ -32,7 +32,7 @@ export default function Card({ id, label, children, peacock = true, className = 
         }
       >
         {cornerMantra && (
-          <div className="pointer-events-none absolute top-4 right-5 z-20 font-gujarati text-sm font-semibold tracking-wider text-(--accent,var(--color-rust)) select-none sm:top-6 sm:right-8 sm:text-base">
+          <div className="pointer-events-none absolute top-3 right-4 z-20 font-gujarati text-xs font-semibold tracking-wider text-(--accent,var(--color-rust)) select-none sm:top-5 sm:right-8 sm:text-base">
             {cornerMantra}
           </div>
         )}
@@ -57,15 +57,17 @@ export default function Card({ id, label, children, peacock = true, className = 
             src={img('peacock.webp')}
             alt=""
             aria-hidden="true"
-            className="card-peacock pointer-events-none absolute bottom-[calc(-1*var(--bw))] left-[calc(-1*var(--bw))] z-10 w-[55%] max-w-[460px] select-none sm:w-[44%] lg:w-[31%]"
+            className="card-peacock pointer-events-none absolute bottom-[calc(-1*var(--bw))] left-[calc(-1*var(--bw))] z-10 w-[30%] max-w-[260px] select-none opacity-80 sm:w-[30%] sm:max-w-[340px] lg:w-[22%] lg:max-w-[380px]"
           />
         )}
 
         <CardContext.Provider value={since}>
           <div
-            className={`relative z-20 flex flex-1 flex-col items-center justify-center px-4 pt-14 pb-16 text-center sm:px-10 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 ${className}`}
+            className={`relative z-20 flex flex-1 flex-col items-center justify-start px-4 pt-28 pb-36 text-center sm:justify-center sm:px-10 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 ${className}`}
           >
-            {children}
+            <div className="my-auto flex w-full flex-col items-center">
+              {children}
+            </div>
           </div>
         </CardContext.Provider>
       </div>

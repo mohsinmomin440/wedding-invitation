@@ -35,7 +35,7 @@ function HighlightedDescription({ text, night }) {
 export default function EventPage({ event }) {
   const theme = THEMES[event.theme]
   const { blessing } = event
-  const cornerMantra = event.invocation?.text || '॥ શ્રી ગણેશાય નમઃ ॥'
+  const cornerMantra = event.invocation?.text || '॥ શ્રી લલિતામ્બિકાય નમઃ ॥'
 
   return (
     <Card
@@ -53,17 +53,17 @@ export default function EventPage({ event }) {
             <span className="animate-spin-slow absolute inset-1 rounded-full border border-dashed border-(--accent-2)/40" />
             <Icon
               name={event.element}
-              className={`size-9 sm:size-11 ${theme.night ? 'brightness-0 invert sepia-[.6] saturate-[2.5] drop-shadow-sm' : 'brightness-[0.38] contrast-150 saturate-150 drop-shadow-[0_0_0.7px_#2a0d05]'}`}
+              className={`size-8 sm:size-9 ${theme.night ? 'brightness-0 invert sepia-[.6] saturate-[2.5]' : 'contrast-125 brightness-90'} drop-shadow-xs`}
             />
           </span>
         </Reveal>
 
         {/* Event Title */}
         <Reveal delay={200} className="mt-2 text-center">
-          <h2 className="max-w-2xl text-2xl font-bold text-(--accent) sm:text-3xl lg:text-4xl">
+          <h2 className="max-w-2xl text-2xl font-bold leading-snug text-(--accent) sm:text-3xl lg:text-4xl">
             {event.title}
           </h2>
-          {event.subtitle && <p className="mt-0.5 text-base text-(--accent-2) italic sm:text-lg">{event.subtitle}</p>}
+          {event.subtitle && <p className="mt-1 text-base text-(--accent-2) italic sm:text-lg">{event.subtitle}</p>}
         </Reveal>
 
         {/* Blessing verse / lines if any */}
