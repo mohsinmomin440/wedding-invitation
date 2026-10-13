@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Card from '../components/Card'
+import ThemeDecor from '../components/ThemeDecor'
 import Reveal from '../components/Reveal'
 import SplitText from '../components/SplitText'
 import { mantra, opening } from '../data/content'
@@ -9,17 +10,15 @@ export default function Ganesh() {
   const [hasPhoto, setHasPhoto] = useState(true)
 
   return (
-    <Card id="ganesh" label="Shri Ganeshay Namah">
+    <Card decor={<ThemeDecor theme="ganesh" />} id="ganesh" label="Shri Ganeshay Namah">
       <Reveal className="flex flex-col items-center">
-        <div className="relative grid size-36 place-items-center sm:size-48 lg:size-52">
-          <span className="absolute inset-0 rounded-full border border-rust/60" />
-          <span className="animate-spin-slow absolute inset-2 rounded-full border border-dashed border-teal-deep/40" />
+        <div className="animate-float relative grid size-40 place-items-center sm:size-52 lg:size-56">
           {hasPhoto ? (
             <img
               src={img('ganesh.png')}
               alt="Shri Ganesh"
               onError={() => setHasPhoto(false)}
-              className="size-[86%] rounded-full object-cover"
+              className="size-full object-contain drop-shadow-[0_6px_14px_rgba(140,50,30,0.28)]"
             />
           ) : (
             <span lang="gu" className="font-gujarati text-7xl font-bold text-rust sm:text-8xl">
@@ -29,7 +28,7 @@ export default function Ganesh() {
         </div>
       </Reveal>
 
-      {/* Main page 1 invocations: Shloka + Shree Ganeshay Namah + Kuldevi */}
+      {/* Main page 1 invocations: Shloka + Shree Ganeshay Namah + Jalaram Bapa + Kuldevi */}
       <Reveal delay={200} lang="gu" className="mt-4 font-gujarati text-base leading-relaxed font-semibold text-rust sm:text-xl">
         {opening.shloka.map((l) => (
           <p key={l}>{l}</p>
@@ -38,13 +37,14 @@ export default function Ganesh() {
 
       <Reveal delay={350} lang="gu" className="mt-3 font-gujarati text-sm font-bold text-teal-deep sm:text-base">
         <p className="text-base font-semibold text-rust sm:text-lg">{mantra.ganesh}</p>
-        <p className="mt-1">
+        <p className="mt-1 text-base font-semibold text-rust sm:text-lg">{mantra.jalaram}</p>
+        <div className="mt-1">
           {mantra.kuldevi.map((line) => (
             <span key={line} className="block">
               {line}
             </span>
           ))}
-        </p>
+        </div>
       </Reveal>
 
       <Reveal delay={450} className="mt-6">

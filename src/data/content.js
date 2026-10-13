@@ -1,6 +1,6 @@
 // Wording updated as per "changes in kankotri.docx" and client audio instructions.
 // Background song; put the file at public/audio/preet-re.mp3
-export const music = { src: 'audio/preet-re.mp3', title: 'Preet Re', volume: 0.6 }
+export const music = { src: 'audio/sajna.mp3', title: 'Sajna', volume: 0.6 }
 
 export const couple = {
   bride: 'Prarthana',
@@ -11,6 +11,7 @@ export const couple = {
 export const mantra = {
   shri: 'શ્રી',
   ganesh: 'શ્રી ગણેશાય નમઃ',
+  jalaram: 'શ્રી જલારામ બાપા ચરણ કમલેભ્યો નમઃ',
   kuldevi: ['કુલદેવી શ્રી હિંગળાજ માતા', 'અને રાજ રાજેશ્વરી અંબાજી મા ની કૃપાથી'],
 }
 
@@ -35,17 +36,6 @@ export const description = {
     'In the penultimate stage, all of us gather under the stars to dance and celebrate to the moon and back in Sangeet Night leading finally to the ultimate Vivah, where Agnidev witnesses and blesses our eternal union.',
   ],
 }
-
-// SEQUENCE OF ELEMENTS: LOTUS, the sacred knot, waves, the north star, infinity, sunmoon, agni
-export const sequenceOfElements = [
-  { icon: 'lotus', name: 'Lotus', meaning: 'Purity, spiritual awakening and divine blessings.' },
-  { icon: 'knot', name: 'The Sacred Knot', meaning: 'The sacred knot of marriage, symbolizing unity and commitment.' },
-  { icon: 'waves', name: 'Waves', meaning: 'Love that comes in fragrant, joyous waves.' },
-  { icon: 'north-star', name: 'The North Star', meaning: 'Guidance and protection of celestial bodies.' },
-  { icon: 'infinity', name: 'Infinity', meaning: 'Deep roots and an unending bond of health and prosperity.' },
-  { icon: 'sun-moon', name: 'Sun-Moon', meaning: 'Harmonious celebration balancing energies in the galaxy.' },
-  { icon: 'agni', name: 'Agni', meaning: 'The sacred fire witnessing and blessing our eternal union.' },
-]
 
 const PARADISE_PARK = ['12,Paradise Park society,Behind Welcom hotel,', 'Ushmanpura,Ahmedabad,Gujarat']
 const KAMLA_AMRUT = ['Kamla Amrut Farm']
@@ -82,7 +72,7 @@ export const events = [
     dressCode: { label: 'Pink', colors: ['#e58fb0'] },
     venue: PARADISE_PARK,
     description:
-      'The love story unfolds as henna adorns and beautifies the bride and all the magnificent guests who come in waves to bless the bride and groom.',
+      'The love story unfolds as henna adorns and beautifies the bride and all the magnificent guests who come in “waves” to bless the bride and groom.',
   },
   {
     id: 'grah-shanti',
@@ -98,18 +88,18 @@ export const events = [
     },
     date: 'Sunday, 22nd November 2026',
     schedule: [
-      { label: 'Ganesh Stapana', time: '9:05 AM' },
-      { label: 'Mandap Stapna', time: '9:25 AM' },
+      { label: 'Ganesh Sthapana', time: '9:05 AM' },
+      { label: 'Mandap Muhurat', time: '9:25 AM' },
       { label: 'Grah Shanti Yagya', time: '10:15 AM', note: '(followed by Lunch)' },
     ],
-    dressCode: { label: 'Yellow/Red/Grahcola', colors: ['#f2c230', '#c0272d'] },
+    dressCode: { label: 'Yellow/Red/Gharchola', colors: ['#f2c230', '#c0272d'] },
     venue: PARADISE_PARK,
     description:
       'The couple seeks blessings of all the celestial bodies and protection and guidance in life, just as sailors seek direction from the “North Star”.',
   },
   {
     id: 'haldi',
-    title: 'Haldi – The roots of Love / Love stems stronger',
+    title: 'Haldi – The roots of Love',
     theme: 'village',
     element: 'infinity',
     invocation: { lang: 'gu', text: '॥ શ્રી ગણેશાય નમઃ ॥' },
@@ -124,7 +114,7 @@ export const events = [
     dressCode: { label: 'Shades of Pastel', colors: ['#f6c6d0', '#fde3a7', '#c8e6c9', '#bfdcf2', '#d9c8ef'] },
     venue: KAMLA_AMRUT,
     description:
-      'Love stems stronger and bonds of relations deepen like the roots during this ceremony, where all relatives bless the couple with “Infinity” in love, health, prosperity and married life.',
+      'Bonds of relations deepen like the roots during this ceremony, where all relatives bless the couple with “Infinity” in love, health, prosperity and married life.',
   },
   {
     id: 'sangeet',
@@ -152,7 +142,7 @@ export const events = [
     element: 'agni',
     invocation: { lang: 'gu', text: '॥ શ્રી ગણેશાય નમઃ ॥' },
     blessing: {
-      verse: { lang: 'hi', lines: ['જેહિ કૈં જેહિ પર સત્ય સનેહૂ।', 'સો તેહિ મિલઇ ન કછુ સંદેહૂ॥'] },
+      verse: { lang: 'hi', lines: ['जेहि कें जेहि पर सत्य सनेहू।', 'सो तेहि मिलइ न कछु संदेहू॥'] },
       lines: [
         'With mantras in the air, blessings in our hearts, and the grace of the divine,',
         'we invite you to witness the sacred union of two hearts and two families.',
@@ -187,8 +177,8 @@ export const family = {
   tahuko: {
     title: 'Tahuko',
     lines: [
-      'સોનાનો સૂરજ ઉગ્યો, રૂડો અવસર આવ્યો અમ ઘેર, રૂડા માંડવા રોપાશે, લીલા તોરણ્યા બંધાશે,',
-      'ઢબુક ઢોલ વાગશે, મીઠી શરણાઈ વાગશે મારા કાકા / મામાના લગન્યા લેવાય છે, માટે તમે જરૂર આવજો ભુલાઈ નહિ.....',
+      'સોનાનો સૂરજ ઉગ્યો, રૂડો અવસર આવ્યો અમ ઘેર, રૂડા માંડવા રોપાશે, લીલા તોરણિયા બંધાશે,',
+      'ઢબુક ઢોલ વાગશે, મીઠી શરણાઈ વાગશે મારા કાકાના લગ્ન લેવાય છે, માટે તમે જરૂર આવજો ભુલાઈ નહિ.....',
     ],
     from: '– Kiyansh, Rishiv, Krisha',
   },

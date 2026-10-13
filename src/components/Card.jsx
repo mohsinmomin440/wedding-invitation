@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { CardContext, useInViewOnce } from './motion'
+import { DefaultFalling } from './ThemeDecor'
 import { img } from '../asset'
 
 // Teal watercolour blooms that wash over a page as it arrives (video transition)
@@ -35,7 +36,7 @@ export default function Card({ id, label, children, peacock = true, className = 
             {cornerMantra}
           </div>
         )}
-        {decor && <div className="absolute inset-0 z-[5]">{decor}</div>}
+        <div className="absolute inset-0 z-[5]">{decor || <DefaultFalling />}</div>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-30 overflow-hidden">
           {INK.map((ink, i) => (
             <img

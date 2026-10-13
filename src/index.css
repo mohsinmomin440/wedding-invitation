@@ -66,11 +66,12 @@
   .decor-toran,
   .decor-bob,
   .decor-leaf,
+  .decor-rise,
   .decor-petal {
     animation-play-state: paused;
   }
   .is-inview :is(.decor-flame, .decor-glow, .decor-bell, .decor-wheel, .decor-cabin, .decor-flag, .decor-star,
-    .decor-shooting, .decor-spin, .decor-toran, .decor-bob, .decor-leaf, .decor-petal) {
+    .decor-shooting, .decor-spin, .decor-toran, .decor-bob, .decor-leaf, .decor-rise, .decor-petal) {
     animation-play-state: running;
   }
   .decor-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.6s ease-in-out infinite; }
@@ -86,6 +87,7 @@
   .decor-bob { animation: float 5s ease-in-out infinite; }
   .decor-leaf,
   .decor-petal { opacity: 0; animation: drift-down 12s linear infinite; }
+  .decor-rise { opacity: 0; animation: rise-up 10s ease-in infinite; }
   .decor-draw {
     opacity: 0;
     transition: opacity 2s ease 0.3s;
@@ -157,8 +159,8 @@
 
   .logo-in {
     opacity: 0;
-    transform: scale(0.82) rotate(-12deg);
-    filter: blur(10px);
+    transform: scale(0.88);
+    filter: blur(8px);
     transition:
       opacity 1.6s var(--ease-silk),
       transform 1.8s var(--ease-silk),
@@ -207,6 +209,7 @@
     .falling-marigold,
     .decor-leaf,
     .decor-petal,
+    .decor-rise,
     .decor-shooting {
       display: none;
     }
@@ -272,6 +275,12 @@
   0%, 82% { opacity: 0; translate: 0 0; }
   85% { opacity: 1; }
   100% { opacity: 0; translate: 260px 85px; }
+}
+@keyframes rise-up {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.6); }
+  12% { opacity: 0.95; }
+  60% { transform: translate3d(var(--drift, 30px), -60vh, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(calc(var(--drift, 30px) * -0.6), -108vh, 0) scale(0.8); }
 }
 @keyframes drift-down {
   0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(0deg); }

@@ -15,19 +15,6 @@ export const THEMES = {
   eternity: { accent: '#b22d2f', accent2: '#a8741a', ink: '#321d0f' },
 }
 
-// Cusped (multi-foil) arch used for Rajput jharokhas and Mughal gateways
-function Arch({ className = '', stroke = 'currentColor' }) {
-  const lobes = 'M20 260 V122 Q20 98 40 92 A14 14 0 0 1 58 74 A16 16 0 0 1 79 55 A19 19 0 0 1 100 32 A19 19 0 0 1 121 55 A16 16 0 0 1 142 74 A14 14 0 0 1 160 92 Q180 98 180 122 V260'
-  return (
-    <svg viewBox="0 0 200 270" className={className} fill="none" stroke={stroke} strokeWidth="1.4" aria-hidden="true">
-      <path d={lobes} />
-      <path d={lobes} transform="translate(100 150) scale(0.86) translate(-100 -150)" strokeWidth="0.8" strokeDasharray="2 3" />
-      <path d="M100 32 V18 M94 22 Q100 8 106 22 Z M100 8 v-4" />
-      <circle cx="100" cy="4" r="2" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-
 function Diya({ className = '', delay = 0 }) {
   return (
     <svg viewBox="0 0 60 60" className={className} aria-hidden="true">
@@ -56,20 +43,6 @@ function Bell({ className = '', delay = 0, length = 60 }) {
         <circle cx="20" cy={length + 43} r="3" fill="#8a560a" />
       </svg>
     </div>
-  )
-}
-
-function Temple({ className = '' }) {
-  return (
-    <svg viewBox="0 0 160 200" className={className} fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
-      <path d="M80 6 V18 M74 12 L80 4 L86 12" />
-      <path d="M80 18 C62 40 56 70 52 100 H108 C104 70 98 40 80 18 Z" />
-      <path d="M66 44 H94 M60 66 H100 M56 86 H104" strokeDasharray="2 2" />
-      <path d="M36 100 H124 V108 H36 Z M44 108 V160 M116 108 V160" />
-      <path d="M62 160 V128 Q80 110 98 128 V160" />
-      <path d="M24 160 H136 V170 H24 Z M16 170 H144 V180 H16 Z" />
-      <path d="M28 100 C30 90 36 84 44 82 M132 100 C130 90 124 84 116 82" />
-    </svg>
   )
 }
 
@@ -157,14 +130,131 @@ const spread = (n, seed) =>
   })
 
 const STARS = spread(46, 3)
-const PETALS = spread(12, 7)
+const STAR_FALL = spread(12, 7)
 const LEAVES = spread(8, 11)
+
+// Something is always falling on every page: marigold flowers and/or coloured petals.
+// `colors` are cycled for the petals; `marigolds` is how many real marigold flowers to add.
+function Falling({ petals = 14, colors = ['#e69123'], marigolds = 0, seed = 7 }) {
+  const P = spread(petals, seed)
+  const M = spread(marigolds, seed + 5)
+  return (
+    <>
+      {P.map((p, i) => (
+        <span
+          key={`p${i}`}
+          className="decor-petal absolute block rounded-[60%_0_60%_0]"
+          style={{
+            left: `${p.x * 100}%`,
+            top: '-6%',
+            width: `${14 + p.s * 14}px`,
+            height: `${14 + p.s * 14}px`,
+            backgroundColor: colors[i % colors.length],
+            boxShadow: '0 1px 3px rgba(60,30,10,0.25)',
+            animationDuration: `${8 + p.d * 6}s`,
+            animationDelay: `${p.y * 5}s`,
+            '--drift': `${(p.x - 0.5) * 180}px`,
+          }}
+        />
+      ))}
+      {M.map((p, i) => (
+        <img
+          key={`m${i}`}
+          src={img('marigold.webp')}
+          alt=""
+          className="decor-petal absolute"
+          style={{
+            left: `${p.x * 100}%`,
+            top: '-8%',
+            width: `${24 + p.s * 24}px`,
+            animationDuration: `${9 + p.d * 6}s`,
+            animationDelay: `${0.5 + p.y * 5}s`,
+            '--drift': `${(p.x - 0.5) * 160}px`,
+          }}
+        />
+      ))}
+    </>
+  )
+}
+
+// Things that float UP from the bottom: golden sparkles or little hearts
+function Rising({ count = 14, kind = 'sparkle', colors = ['#d4a537'], seed = 3 }) {
+  return spread(count, seed).map((p, i) => (
+    <span
+      key={i}
+      className="decor-rise absolute block leading-none select-none"
+      style={{
+        left: `${p.x * 100}%`,
+        bottom: '-6%',
+        color: colors[i % colors.length],
+        fontSize: `${(kind === 'heart' ? 14 : 10) + p.s * (kind === 'heart' ? 16 : 12)}px`,
+        textShadow: kind === 'sparkle' ? '0 0 6px rgba(255,214,102,0.9)' : 'none',
+        animationDuration: `${9 + p.d * 7}s`,
+        animationDelay: `${p.y * 6}s`,
+        '--drift': `${(p.x - 0.5) * 120}px`,
+      }}
+    >
+      {kind === 'heart' ? '♥' : '✦'}
+    </span>
+  ))
+}
+
+const Layer = ({ children }) => (
+  <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+    {children}
+  </div>
+)
+
+// Default page decor (Ganesh, monogram, Saptabandhan, family pages)
+export function DefaultFalling() {
+  return (
+    <Layer>
+      <Falling petals={6} colors={['#e69123', '#d4572a']} marigolds={9} seed={21} />
+    </Layer>
+  )
+}
 
 export default function ThemeDecor({ theme }) {
   switch (theme) {
+    case 'ganesh': // Page 1: marigolds fall, gold sparkles twinkle around the emblem
+      return (
+        <Layer>
+          <Falling petals={4} colors={['#e69123']} marigolds={9} seed={21} />
+          {STARS.slice(0, 22).map((s, i) => (
+            <span
+              key={i}
+              className="decor-star absolute block rounded-full bg-[#d4a537]"
+              style={{ left: `${s.x * 100}%`, top: `${s.y * 100}%`, width: `${2 + s.s * 3}px`, height: `${2 + s.s * 3}px`, animationDelay: `${s.d * 4}s`, animationDuration: `${2.5 + s.s * 3}s` }}
+            />
+          ))}
+        </Layer>
+      )
+    case 'monogram': // Page 2: golden sparkles drift upwards around the monogram
+      return (
+        <Layer>
+          <Rising count={22} kind="sparkle" colors={['#d4a537', '#f4b946', '#e8c26a']} seed={13} />
+        </Layer>
+      )
+    case 'sapta': // Saptabandhan: soft lotus petals fall, lotus floats bottom-right
+      return (
+        <Layer>
+          <Falling petals={16} colors={['#f3b6cc', '#fbe3ec', '#e58fb0', '#fff1f5']} seed={81} />
+          <div className="absolute right-[4%] bottom-[3%] flex items-end gap-1 opacity-80 sm:right-[6%]">
+            <img src={img('icon-lotus.png')} alt="" className="decor-bob w-12 sm:w-16" />
+            <img src={img('icon-lotus.png')} alt="" className="decor-bob w-8 sm:w-11" style={{ animationDelay: '1.2s' }} />
+          </div>
+        </Layer>
+      )
+    case 'family': // Family: hearts rise, a few marigolds fall
+      return (
+        <Layer>
+          <Rising count={14} kind="heart" colors={['#b22d2f', '#e58fb0', '#b54226']} seed={91} />
+          <Falling petals={0} marigolds={5} seed={95} />
+        </Layer>
+      )
     case 'forest':
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <Layer>
           {LEAVES.map((l, i) => (
             <Leaf
               key={i}
@@ -177,46 +267,31 @@ export default function ThemeDecor({ theme }) {
             <img src={img('icon-lotus.png')} alt="" className="decor-bob w-8 sm:w-11" style={{ animationDelay: '1.2s' }} />
           </div>
           <img src={img('icon-waves.png')} alt="" className="absolute right-[3%] bottom-[1%] w-24 opacity-40 sm:right-[5%] sm:w-32" />
-        </div>
+        </Layer>
       )
-    case 'rajputana':
+    case 'rajputana': // Chundadi: red rose petals + marigolds
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Arch className="decor-draw absolute top-[3%] left-1/2 w-[92%] max-w-[620px] -translate-x-1/2 text-[#b07a1f] opacity-30" />
+        <Layer>
+          <Falling petals={14} colors={['#a82435', '#c0392b', '#d4a537']} marigolds={4} seed={31} />
           <div className="absolute right-[4%] bottom-[3%] flex items-end gap-2 sm:right-[6%]">
             <Diya className="w-10 sm:w-14" />
             <Diya className="w-12 sm:w-16" delay={300} />
             <Diya className="w-10 sm:w-14" delay={600} />
           </div>
-        </div>
+        </Layer>
       )
-    case 'mughal':
+    case 'mughal': // Mehndi: pink petals
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Arch className="decor-draw absolute top-[3%] left-1/2 w-[92%] max-w-[620px] -translate-x-1/2 text-[#a8325f] opacity-25" />
-          {PETALS.map((p, i) => (
-            <span
-              key={i}
-              className="decor-petal absolute block rounded-[60%_0_60%_0] bg-[#e58fb0]"
-              style={{
-                left: `${p.x * 100}%`,
-                top: '-5%',
-                width: `${10 + p.s * 10}px`,
-                height: `${10 + p.s * 10}px`,
-                opacity: 0.75,
-                animationDuration: `${9 + p.d * 7}s`,
-                animationDelay: `${p.y * 8}s`,
-                '--drift': `${(p.x - 0.5) * 160}px`,
-              }}
-            />
-          ))}
+        <Layer>
+          <Falling petals={18} colors={['#e58fb0', '#d96a97', '#f3b6cc']} seed={41} />
           <img src={img('icon-waves.png')} alt="" className="decor-bob absolute right-[4%] bottom-[3%] w-20 opacity-60 sm:w-28" />
-        </div>
+        </Layer>
       )
-    case 'temple':
+    case 'temple': // Grah Shanti: marigolds + saffron petals
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Temple className="absolute top-[3%] left-1/2 w-40 -translate-x-1/2 text-[#a86d08] opacity-20 sm:w-56" />
+        <Layer>
+          <Falling petals={8} colors={['#e69123', '#f2c230']} marigolds={8} seed={51} />
+          <Rising count={10} kind="sparkle" colors={['#f2a030', '#ffcf5a']} seed={55} />
           <div className="absolute top-0 right-[8%] flex gap-4 sm:right-[10%] sm:gap-8">
             <Bell className="w-6 sm:w-8" length={50} />
             <Bell className="w-8 sm:w-10" length={90} delay={400} />
@@ -225,18 +300,19 @@ export default function ThemeDecor({ theme }) {
           <div className="absolute right-[5%] bottom-[3%] sm:right-[7%]">
             <Diya className="w-12 sm:w-16" />
           </div>
-        </div>
+        </Layer>
       )
-    case 'village':
+    case 'village': // Haldi: marigolds + pastel petals
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <Layer>
           <Bunting className="absolute top-0 right-0 h-12 w-[70%] sm:h-16" />
+          <Falling petals={10} colors={['#f9d27a', '#f6a5b8', '#9fd7b5', '#9cc7ec', '#c8b0ea']} marigolds={7} seed={61} />
           <FerrisWheel className="absolute right-[3%] bottom-[2%] h-32 w-28 opacity-70 sm:h-48 sm:w-44" />
-        </div>
+        </Layer>
       )
-    case 'golden':
+    case 'golden': // Sangeet: twinkling stars + falling star-sparkles
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <Layer>
           {STARS.map((s, i) => (
             <span
               key={i}
@@ -251,15 +327,31 @@ export default function ThemeDecor({ theme }) {
               }}
             />
           ))}
+          {STAR_FALL.map((p, i) => (
+            <span
+              key={`star-fall-${i}`}
+              className="decor-petal absolute block rotate-45 bg-[#fef08a] shadow-[0_0_8px_2px_rgba(255,236,170,0.4)]"
+              style={{
+                left: `${p.x * 100}%`,
+                top: '-5%',
+                width: `${4 + p.s * 5}px`,
+                height: `${4 + p.s * 5}px`,
+                opacity: 0.85,
+                animationDuration: `${8 + p.d * 6}s`,
+                animationDelay: `${p.y * 6}s`,
+                '--drift': `${(p.x - 0.5) * 140}px`,
+              }}
+            />
+          ))}
           <span className="decor-shooting absolute top-[12%] left-[30%] block h-px w-24 bg-gradient-to-r from-transparent to-[#fff6d8]" />
           <div className="absolute top-[5%] right-[6%] size-20 rounded-full shadow-[0_0_60px_20px_rgba(255,236,170,0.25)] sm:size-28">
             <div className="h-full w-full rounded-full bg-[radial-gradient(circle_at_35%_35%,#fff8df,#f1d58c_60%,#c9a24e)] [mask-image:radial-gradient(circle_at_72%_32%,transparent_42%,#000_43%)]" />
           </div>
-        </div>
+        </Layer>
       )
-    case 'eternity':
+    case 'eternity': // Wedding: marigold toran + falling marigolds
       return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <Layer>
           <Rays className="decor-spin absolute top-[2%] left-1/2 w-[85%] max-w-[560px] -translate-x-1/2 text-[#d4a537] opacity-15" />
           <div className="absolute top-0 right-0 flex w-[70%] justify-between px-2">
             {Array.from({ length: 9 }, (_, i) => (
@@ -270,23 +362,8 @@ export default function ThemeDecor({ theme }) {
               </div>
             ))}
           </div>
-          {PETALS.map((p, i) => (
-            <img
-              key={i}
-              src={img('marigold.webp')}
-              alt=""
-              className="decor-petal absolute"
-              style={{
-                left: `${p.x * 100}%`,
-                top: '-6%',
-                width: `${18 + p.s * 22}px`,
-                animationDuration: `${8 + p.d * 6}s`,
-                animationDelay: `${0.8 + p.y * 6}s`,
-                '--drift': `${(p.x - 0.5) * 140}px`,
-              }}
-            />
-          ))}
-        </div>
+          <Falling petals={0} marigolds={12} seed={71} />
+        </Layer>
       )
     default:
       return null

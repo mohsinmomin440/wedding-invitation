@@ -6,6 +6,32 @@ import { mapsLink } from '../data/content'
 
 const LANG_FONT = { sa: 'font-devanagari', hi: 'font-devanagari' }
 
+function HighlightedDescription({ text, night }) {
+  if (!text) return null
+  const parts = text.split(/(“[^”]+”|"[^"]+")/g)
+  return (
+    <p className="text-xs leading-relaxed italic opacity-95 sm:text-sm">
+      {parts.map((part, i) => {
+        if (/^[“"][^”"]+[”"]$/.test(part)) {
+          return (
+            <span
+              key={i}
+              className={`box-decoration-clone rounded-sm border-b-2 px-1.5 py-0.5 font-bold not-italic ${
+                night
+                  ? 'border-amber-300 bg-amber-300/25 text-amber-200'
+                  : 'border-gold bg-gold/40 text-teal-deep'
+              }`}
+            >
+              {part}
+            </span>
+          )
+        }
+        return part
+      })}
+    </p>
+  )
+}
+
 export default function EventPage({ event }) {
   const theme = THEMES[event.theme]
   const { blessing } = event
@@ -27,7 +53,7 @@ export default function EventPage({ event }) {
             <span className="animate-spin-slow absolute inset-1 rounded-full border border-dashed border-(--accent-2)/40" />
             <Icon
               name={event.element}
-              className={`size-8 sm:size-9 ${theme.night ? 'brightness-0 invert sepia-[.6] saturate-[2.5]' : ''}`}
+              className={`size-9 sm:size-11 ${theme.night ? 'brightness-0 invert sepia-[.6] saturate-[2.5] drop-shadow-sm' : 'brightness-[0.38] contrast-150 saturate-150 drop-shadow-[0_0_0.7px_#2a0d05]'}`}
             />
           </span>
         </Reveal>
@@ -42,7 +68,7 @@ export default function EventPage({ event }) {
 
         {/* Blessing verse / lines if any */}
         {blessing?.verse && (
-          <Reveal delay={350} lang={blessing.verse.lang} className={`mt-3 ${LANG_FONT[blessing.verse.lang]} text-base font-semibold text-(--accent) sm:text-lg`}>
+          <Reveal delay={350} lang={blessing.verse.lang} className={`mt-3 ${LANG_FONT[blessing.verse.lang]} text-base font-semibold leading-relaxed text-(--accent) sm:text-lg`}>
             {blessing.verse.lines.map((l) => (
               <p key={l}>{l}</p>
             ))}
@@ -123,11 +149,16 @@ export default function EventPage({ event }) {
 
         {/* Description at the end of the page */}
         {event.description && (
-          <Reveal delay={1200} as="footer" className="mt-5 max-w-xl">
-            <Divider className="mb-2 text-(--accent)/50" />
-            <p className="text-xs leading-relaxed italic text-(--page-ink) opacity-90 sm:text-sm">
-              {event.description}
-            </p>
+          <Reveal delay={1200} as="footer" className="relative z-20 mt-6 w-full max-w-xl px-2">
+            <div
+              className={`rounded-lg border border-(--accent)/25 px-4 py-3 text-center shadow-xs sm:px-6 sm:py-3.5 ${
+                theme.night
+                  ? 'bg-ink/80 text-paper/95 backdrop-blur-md'
+                  : 'bg-paper/90 text-(--page-ink) backdrop-blur-xs'
+              }`}
+            >
+              <HighlightedDescription text={event.description} night={theme.night} />
+            </div>
           </Reveal>
         )}
       </div>

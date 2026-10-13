@@ -1,11 +1,12 @@
 import Card from '../components/Card'
+import ThemeDecor from '../components/ThemeDecor'
 import { Divider } from '../components/Ornaments'
 import Reveal from '../components/Reveal'
 import { family } from '../data/content'
 
 export default function Family() {
   return (
-    <Card id="family" label="A cordial invitation" cornerMantra="॥ શ્રી ગણેશાય નમઃ ॥">
+    <Card decor={<ThemeDecor theme="family" />} id="family" label="A cordial invitation" cornerMantra="॥ શ્રી ગણેશાય નમઃ ॥">
       <Reveal delay={100} className="mt-2">
         <h2 className="text-2xl text-crimson uppercase sm:text-3xl">{family.title}</h2>
         <Divider className="mt-3 text-rust" />

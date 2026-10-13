@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Card from '../components/Card'
+import ThemeDecor from '../components/ThemeDecor'
 import Reveal, { INK_LEAD_MS } from '../components/Reveal'
 import SplitText from '../components/SplitText'
 import { CardContext, useInViewOnce } from '../components/motion'
@@ -23,7 +24,7 @@ function Logo() {
 
 export default function Monogram() {
   return (
-    <Card id="monogram" label="Prarthana and Yatin" cornerMantra="॥ શ્રી ગણેશાય નમઃ ॥">
+    <Card decor={<ThemeDecor theme="monogram" />} id="monogram" label="Prarthana and Yatin" cornerMantra="॥ શ્રી ગણેશાય નમઃ ॥">
       <Logo />
       <h1 className="mt-6 flex flex-col items-center leading-tight">
         <SplitText
