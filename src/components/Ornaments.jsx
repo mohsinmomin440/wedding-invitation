@@ -22,8 +22,12 @@ export function MantraHeader({ className = '' }) {
     <header lang="gu" className={`font-gujarati text-[var(--accent,#b54226)] ${className}`}>
       <p className="text-2xl font-semibold sm:text-3xl">{mantra.shri}</p>
       <p className="mt-1 text-lg sm:text-xl">{mantra.ganesh}</p>
-      <p className="mt-1 text-base font-semibold text-[var(--accent-2,#01424e)] sm:text-lg">
-        {mantra.lalitambika}
+      <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed font-bold text-[var(--accent-2,#01424e)] sm:text-base">
+        {mantra.kuldevi.map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
       </p>
     </header>
   )

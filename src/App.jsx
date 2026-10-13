@@ -16,7 +16,7 @@ const sections = [
   { id: 'monogram', label: 'Prarthana & Yatin' },
   { id: 'saptabandhan', label: 'Saptabandhan' },
   ...events.map((e) => ({ id: e.id, label: e.title })),
-  { id: 'family', label: 'Bhatt Family' },
+  { id: 'family', label: 'Karia Family' },
 ]
 
 export default function App() {

@@ -28,7 +28,7 @@ export default function Ganesh() {
         </div>
       </Reveal>
 
-      {/* Main page 1 invocations */}
+      {/* Main page 1 invocations: Shloka + Shree Ganeshay Namah + Jalaram Bapa + Kuldevi */}
       <Reveal delay={200} lang="gu" className="mt-4 font-gujarati text-base leading-relaxed font-semibold text-rust sm:text-xl">
         {opening.shloka.map((l) => (
           <p key={l}>{l}</p>
@@ -37,34 +37,30 @@ export default function Ganesh() {
 
       <Reveal delay={350} lang="gu" className="mt-3 font-gujarati text-sm font-bold text-teal-deep sm:text-base">
         <p className="text-base font-semibold text-rust sm:text-lg">{mantra.ganesh}</p>
-        <p className="mt-0.5 text-base font-semibold text-teal-deep sm:text-lg">{mantra.lalitambika}</p>
+        <p className="mt-1 text-base font-semibold text-rust sm:text-lg">{mantra.jalaram}</p>
+        <div className="mt-1">
+          {mantra.kuldevi.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </div>
       </Reveal>
 
       <Reveal delay={450} className="mt-6">
         <p className="text-xs tracking-[0.35em] text-teal-deep uppercase sm:text-sm">{opening.intro}</p>
       </Reveal>
-      {/* Bride First for Bride Side */}
-      <div className="mt-4 flex flex-col items-center">
-        <SplitText
-          chars={opening.bride.name.toUpperCase()}
-          label={opening.bride.name}
-          delay={650}
-          className="tracking-name text-2xl font-semibold text-crimson sm:text-4xl"
-        />
+      <div className="mt-3 flex flex-col items-center">
+        <SplitText chars={opening.groom.name.toUpperCase()} label={opening.groom.name} delay={650} className="tracking-name text-2xl font-semibold text-crimson sm:text-4xl" />
         <Reveal delay={1100}>
-          <p className="mt-1.5 text-xs tracking-wider text-teal-deep uppercase sm:text-sm">{opening.bride.parents}</p>
+          <p className="mt-0.5 text-xs tracking-wider text-teal-deep uppercase sm:text-sm">{opening.groom.parents}</p>
         </Reveal>
         <Reveal delay={1250}>
-          <img src={img('ampersand.webp')} alt="and" className="my-2.5 w-8 sm:w-12" />
+          <img src={img('ampersand.webp')} alt="and" className="my-2 w-8 sm:w-12" />
         </Reveal>
-        <SplitText
-          chars={[{ ch: 'ય', className: 'font-devanagari font-semibold' }, ...opening.groom.name.slice(1).toUpperCase()]}
-          label={opening.groom.name}
-          delay={1400}
-          className="tracking-name text-2xl font-semibold text-crimson sm:text-4xl"
-        />
+        <SplitText chars={opening.bride.name.toUpperCase()} label={opening.bride.name} delay={1400} className="tracking-name text-2xl font-semibold text-crimson sm:text-4xl" />
         <Reveal delay={2000}>
-          <p className="mt-1.5 text-xs tracking-wider text-teal-deep uppercase sm:text-sm">{opening.groom.parents}</p>
+          <p className="mt-0.5 text-xs tracking-wider text-teal-deep uppercase sm:text-sm">{opening.bride.parents}</p>
         </Reveal>
       </div>
 

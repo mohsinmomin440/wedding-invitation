@@ -32,7 +32,7 @@ export default function Card({ id, label, children, peacock = true, className = 
         }
       >
         {cornerMantra && (
-          <div className="pointer-events-none absolute top-3 right-4 z-20 font-gujarati text-xs font-semibold tracking-wider text-(--accent,var(--color-rust)) select-none sm:top-5 sm:right-8 sm:text-base">
+          <div className="pointer-events-none absolute top-4 right-5 z-20 font-gujarati text-sm font-semibold tracking-wider text-(--accent,var(--color-rust)) select-none sm:top-6 sm:right-8 sm:text-base">
             {cornerMantra}
           </div>
         )}
@@ -57,7 +57,7 @@ export default function Card({ id, label, children, peacock = true, className = 
             src={img('peacock.webp')}
             alt=""
             aria-hidden="true"
-            className="card-peacock pointer-events-none absolute bottom-[calc(-1*var(--bw))] left-[calc(-1*var(--bw))] z-10 w-[30%] max-w-[260px] select-none opacity-80 sm:w-[30%] sm:max-w-[340px] lg:w-[22%] lg:max-w-[380px]"
+            className="card-peacock pointer-events-none absolute bottom-[calc(-1*var(--bw))] left-[calc(-1*var(--bw))] z-10 w-[32%] max-w-[260px] select-none sm:w-[44%] sm:max-w-[460px] lg:w-[31%]"
           />
         )}
 
