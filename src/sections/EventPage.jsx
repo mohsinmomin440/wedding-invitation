@@ -74,7 +74,7 @@ export default function EventPage({ event }) {
             ))}
           </Reveal>
         )}
-        {blessing && (
+        {blessing?.lines && (
           <Reveal
             delay={450}
             lang={blessing.lang}
